@@ -39,19 +39,14 @@ void setup() {
 void loop(){
   switch(currentMode){
     case 1:
-      if(analogRead(potmeterPin)>=512){
-        currentMode=2;
-      }
       if(Serial.available()>0){
-        
+        displayMsg(Serial.readString());
       }
-      displayMsg("s o.s");
     break;
     case 2:
       if(analogRead(potmeterPin)<512){
         currentMode=1;
       }
-      
     break;
   }
 }
@@ -72,17 +67,26 @@ void displayMsg(String message){
       case 'l':
         longBoop();
         break;
-      /*
-      case 'p':
-        pauseBoop();
+      case 'b':
+        delay(2000);
         break;
-      case 'd':
-        dotBoop();
-        break;
-      */
       case 'e':
-        digitalWrite(debugled, HIGH);
+        if(i>=message.length()-1){
+          digitalWrite(debugled, HIGH);
+          delay(100);
+          digitalWrite(debugled, LOW);
+        }
+        break;
     }
+    /*if(currentMode=1&&analogRead(potmeterPin)>=512){
+        currentMode=2;
+        break;
+    }
+    else if(currentMode=2&&analogRead(potmeterPin)<=512){
+      currentMode=1;
+      break;
+    }
+    */
     if(message.charAt(i)=='e'){
       break;
     }
@@ -208,6 +212,9 @@ String getCharacterMorse(char character){
   if(character == '0'){
     return "lllllb";
   }
+  if(character == ' '){
+    return "";
+  }
   /*
   if(character == ' '){
     return "pb";
@@ -217,7 +224,6 @@ String getCharacterMorse(char character){
   }*/
   return "e";
 }
-
 /*
 void dotBoop(){
   digitalWrite(msgled, LOW);
@@ -245,7 +251,6 @@ void pauseBoop(){
   delay(200);
 }
 */
-
 void shortBoop(){
   digitalWrite(msgled, LOW);
   delay(500);
