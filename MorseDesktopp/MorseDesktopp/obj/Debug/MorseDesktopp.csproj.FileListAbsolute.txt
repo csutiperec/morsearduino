@@ -8,3 +8,13 @@ C:\Users\csutiperec\source\repos\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesk
 C:\Users\csutiperec\source\repos\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.csproj.CoreCompileInputs.cache
 C:\Users\csutiperec\source\repos\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.exe
 C:\Users\csutiperec\source\repos\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.pdb
+C:\Work\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.csprojAssemblyReference.cache
+C:\Work\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.Form1.resources
+C:\Work\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.Properties.Resources.resources
+C:\Work\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.csproj.GenerateResource.cache
+C:\Work\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.csproj.CoreCompileInputs.cache
+C:\Work\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.exe
+C:\Work\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.pdb
+C:\Work\morsearduino\MorseDesktopp\MorseDesktopp\bin\Debug\MorseDesktopp.exe.config
+C:\Work\morsearduino\MorseDesktopp\MorseDesktopp\bin\Debug\MorseDesktopp.exe
+C:\Work\morsearduino\MorseDesktopp\MorseDesktopp\bin\Debug\MorseDesktopp.pdb
