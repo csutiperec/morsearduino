@@ -20,7 +20,7 @@ namespace MorseDesktopp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SerialPort serialPort = new SerialPort("COM3", 6969);
+            SerialPort serialPort = new SerialPort("COM3", 9600);
             try
             {
                 serialPort.Open();
