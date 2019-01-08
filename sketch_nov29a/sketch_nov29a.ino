@@ -41,12 +41,11 @@ void loop(){
   switch(currentMode){
     case 1:
       if(Serial.available()>0){
-        displayMsg("asd");        
+        displayMsg(Serial.readString());        
       }
     break;
     case 2:
       String msg = encodeMessage();
-      Serial.print("MESSAGE: ");
       Serial.println(msg);
     break;
   }
@@ -222,7 +221,7 @@ String getCharacterMorse(char character){
     return "sllb";
   }
   if(character == 'x'){
-    return "lssl";
+    return "lsslb";
   }
   if(character == 'y'){
     return "lsllb";
