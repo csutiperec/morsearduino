@@ -1,6 +1,6 @@
 #define msgreader A0 //this is the Arduino pin for the light sensor
 #define msgled 9 // this is the Arduino pin for the led that we transfer our message with
-#define lazer 8 //this is the Arduino pin for the led that lights up when we press the button
+#define laser 8 //this is the Arduino pin for the led that lights up when we press the button
 #define debugled 2 //this is the Arduino pin for the led that lights up when there is some kind of error
 #define bttnpin 7 //this is the Arduino pin for the button
 #define potmeterPin A1 //this is the Arduino pin for the potmeter
@@ -19,7 +19,7 @@ int currentMode; //can be: writemessage (1), readmessage (2)
 void setup() {
   pinMode(msgreader, INPUT);
   pinMode(msgled, OUTPUT);
-  pinMode(lazer, OUTPUT);
+  pinMode(laser, OUTPUT);
   pinMode(debugled, OUTPUT);
   pinMode(bttnpin, INPUT);
   pinMode(potmeterPin, INPUT);
@@ -29,27 +29,38 @@ void setup() {
   pinMode(in4, OUTPUT);
 
   digitalWrite(msgled, HIGH);
-  digitalWrite(lazer, LOW);
+  digitalWrite(laser, LOW);
   digitalWrite(debugled, LOW);
   currentMode = 1;
 
-  Serial.begin(6969);
+  Serial.begin(9600);
 }
 
 void loop(){
+  CheckMode();
   switch(currentMode){
     case 1:
       if(Serial.available()>0){
-        displayMsg(Serial.readString());
+        displayMsg("asd");        
       }
     break;
     case 2:
-      if(analogRead(potmeterPin)<512){
-        currentMode=1;
-      }
+      String msg = encodeMessage();
+      Serial.print("MESSAGE: ");
+      Serial.println(msg);
     break;
   }
 }
+
+void CheckMode(){
+  if(currentMode=1&&analogRead(potmeterPin)>=512){
+    currentMode=2;
+  }
+  else if(currentMode=2&&analogRead(potmeterPin)<=512){
+    currentMode=1;
+  }
+}
+
 void displayMsg(String message){
   digitalWrite(debugled, LOW);
   message.toLowerCase();
@@ -78,18 +89,55 @@ void displayMsg(String message){
         }
         break;
     }
-    /*if(currentMode=1&&analogRead(potmeterPin)>=512){
-        currentMode=2;
-        break;
-    }
-    else if(currentMode=2&&analogRead(potmeterPin)<=512){
-      currentMode=1;
-      break;
-    }
-    */
+    
     if(message.charAt(i)=='e'){
       break;
     }
+  }
+}
+
+void checkBtn()
+{
+  if (digitalRead(bttnpin) == LOW)
+    digitalWrite(laser, LOW);
+  if (digitalRead(bttnpin) == HIGH)
+    digitalWrite(laser, HIGH);      
+}
+
+String encodeMessage(){
+  String encodeMsg = "";
+  while (currentMode == 2){
+    Serial.println(String(analogRead(msgreader)));
+    while (encodeMsg.charAt(encodeMsg.length() - 1) != 'b'){
+      checkBtn();
+      if (analogRead(msgreader) > 800){
+        checkBtn();
+        int startTime = millis();
+        int stopTime = startTime;
+        while (analogRead(msgreader) > 800){
+          checkBtn();
+          stopTime = millis();
+        }
+        if (abs(stopTime - startTime) < 1000)
+          encodeMsg += "s";
+        else if (abs(stopTime - startTime) > 1000)
+          encodeMsg += "l";
+        Serial.println(encodeMsg);
+        int emptyTime = millis();
+        int secondEmptyTime = emptyTime;
+        while (analogRead(msgreader) < 800){
+          checkBtn();
+          secondEmptyTime = millis();
+          if (abs(secondEmptyTime - emptyTime > 3000)){
+            encodeMsg += "b";
+            break;
+          }
+        }
+      }
+      delay(200);
+    }
+    return encodeMsg;
+    CheckMode(); 
   }
 }
 
