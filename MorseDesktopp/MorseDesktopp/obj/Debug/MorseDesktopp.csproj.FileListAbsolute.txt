@@ -18,3 +18,13 @@ C:\Work\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.pdb
 C:\Work\morsearduino\MorseDesktopp\MorseDesktopp\bin\Debug\MorseDesktopp.exe.config
 C:\Work\morsearduino\MorseDesktopp\MorseDesktopp\bin\Debug\MorseDesktopp.exe
 C:\Work\morsearduino\MorseDesktopp\MorseDesktopp\bin\Debug\MorseDesktopp.pdb
+E:\GitProjects\morsearduino\MorseDesktopp\MorseDesktopp\bin\Debug\MorseDesktopp.exe.config
+E:\GitProjects\morsearduino\MorseDesktopp\MorseDesktopp\bin\Debug\MorseDesktopp.exe
+E:\GitProjects\morsearduino\MorseDesktopp\MorseDesktopp\bin\Debug\MorseDesktopp.pdb
+E:\GitProjects\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.csprojAssemblyReference.cache
+E:\GitProjects\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.Form1.resources
+E:\GitProjects\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.Properties.Resources.resources
+E:\GitProjects\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.csproj.GenerateResource.cache
+E:\GitProjects\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.csproj.CoreCompileInputs.cache
+E:\GitProjects\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.exe
+E:\GitProjects\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.pdb
