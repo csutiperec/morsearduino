@@ -37,7 +37,7 @@ void setup() {
 }
 
 void loop(){
-  CheckMode();
+  checkMode();
   switch(currentMode){
     case 1:
       if(Serial.available()>0){
@@ -52,7 +52,7 @@ void loop(){
   }
 }
 
-void CheckMode(){
+void checkMode(){
   if(currentMode=1&&analogRead(potmeterPin)>=512){
     currentMode=2;
   }
@@ -137,7 +137,7 @@ String encodeMessage(){
       delay(200);
     }
     return encodeMsg;
-    CheckMode(); 
+    checkMode(); 
   }
 }
 
