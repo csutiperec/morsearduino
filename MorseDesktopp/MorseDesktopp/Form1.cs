@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,6 +14,7 @@ namespace MorseDesktopp
 {
     public partial class Form1 : Form
     {
+        bool isReading = false;
         public Form1()
         {
             InitializeComponent();
@@ -20,6 +22,7 @@ namespace MorseDesktopp
 
         private void button1_Click(object sender, EventArgs e)
         {
+            isReading = false;
             SerialPort serialPort = new SerialPort("COM3", 9600);
             try
             {
@@ -40,9 +43,8 @@ namespace MorseDesktopp
             try
             {
                 serialPort.Open();
-                string msg = serialPort.ReadLine();
-                serialPort.Close();
-                textBox1.Text = decodeMsg(msg);
+                Thread t = new Thread(ReadThread);
+                t.Start(serialPort);
             }
             catch (Exception)
             {
@@ -50,7 +52,17 @@ namespace MorseDesktopp
                 textBox1.Text = "An error has occured! \r\nAre you sure the device is plugged in to the COM3 port of your desktop?";
             }
         }
+        private void ReadThread(object context)
+        {
+            SerialPort serialPort = context as SerialPort;
 
+            while (serialPort.IsOpen)
+            {
+                string inData = serialPort.ReadLine();
+                Console.WriteLine(inData);
+                textBox1.Text = inData;
+            }
+        }
         private string decodeMsg(string message)
         {
             string msg = "";
@@ -146,6 +158,14 @@ namespace MorseDesktopp
                     return "0";
             }
             return "";
+        }
+
+        private void SerialReader_Tick(object sender, EventArgs e)
+        {
+            if (isReading)
+            {
+                
+            }
         }
     }
 }
