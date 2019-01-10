@@ -46,16 +46,17 @@ void loop(){
     break;
     case 2:
       String msg = encodeMessage();
-      Serial.println(msg);
+      if(msg.indexOf("b")>=0)
+        Serial.println(msg);
     break;
   }
 }
 
 void checkMode(){
-  if(currentMode=1&&analogRead(potmeterPin)>=512){
+  if(analogRead(potmeterPin)>=512){
     currentMode=2;
   }
-  else if(currentMode=2&&analogRead(potmeterPin)<=512){
+  else if(analogRead(potmeterPin)<=512){
     currentMode=1;
   }
 }
@@ -70,6 +71,9 @@ void displayMsg(String message){
   }
   message = decodeMessage(message);
   for(int i= 0; i<=message.length(); i++){
+    checkMode();
+    if(currentMode==2)
+      break;
     switch(message.charAt(i)){
       case 's':
         shortBoop();
@@ -106,7 +110,6 @@ void checkBtn()
 String encodeMessage(){
   String encodeMsg = "";
   while (currentMode == 2){
-    Serial.println(String(analogRead(msgreader)));
     while (encodeMsg.charAt(encodeMsg.length() - 1) != 'b'){
       checkBtn();
       if (analogRead(msgreader) > 800){
@@ -121,7 +124,6 @@ String encodeMessage(){
           encodeMsg += "s";
         else if (abs(stopTime - startTime) > 1000)
           encodeMsg += "l";
-        Serial.println(encodeMsg);
         int emptyTime = millis();
         int secondEmptyTime = emptyTime;
         while (analogRead(msgreader) < 800){
@@ -133,6 +135,9 @@ String encodeMessage(){
           }
         }
       }
+      checkMode();
+      if(currentMode == 1)
+        break;
       delay(200);
     }
     return encodeMsg;
