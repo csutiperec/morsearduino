@@ -14,41 +14,68 @@ namespace MorseDesktopp
 {
     public partial class Form1 : Form
     {
+        SerialPort serialPort = new SerialPort("COM3", 9600);
         public Form1()
         {
             InitializeComponent();
         }
 
+        private void openPort()
+        {
+            if (!serialPort.IsOpen)
+                try
+                {
+                    serialPort.DtrEnable = true;
+                    serialPort.Open();
+                }
+                catch (Exception e)
+                {
+                    //textBox1.Text = "An error has occured! \r\nAre you sure the device is plugged in to the COM3 port of your desktop?";
+                    textBox1.Text = e.ToString();
+                }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            SerialPort serialPort = new SerialPort("COM3", 9600);
-            try
-            {
-                serialPort.Open();
-                serialPort.Write(textBox1.Text);
-                serialPort.Close();
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("No device found on port COM3");
-                textBox1.Text = "An error has occured! \r\nAre you sure the device is plugged in to the COM3 port of your desktop?";
-            }
+            openPort();
+            serialPort.Write(textBox1.Text);
+            serialPort.Close();
+        }
+
+        private void serialPort_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {
+            string msg = serialPort.ReadLine();
+            this.BeginInvoke(new LineReceivedEvent(LineReceived), msg);
+        }
+
+        private delegate void LineReceivedEvent(string msg);
+        private void LineReceived(string msg)
+        {
+            string decodedMsg = decodeMsg(msg);
+            textBox1.Text = decodedMsg;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+            textBox1.Clear();
+            openPort();
+            serialPort.DataReceived += serialPort_DataReceived;
         }
         private string decodeMsg(string message)
         {
+            for (int j = message.Length - 1; j < 0; j++)
+            {
+                if (message[j].ToString() != "b")
+                    message.Remove(j, 1);
+            }
             string msg = "";
-            int i = 0;
-            while (i<message.Length)
+            int i = 1;
+            while (i < message.Length)
             {
                 string charcode = "";
-                while (message[i] != 'b')
+                while (message[i - 1] != 'b')
                 {
-                    charcode = charcode + message[i];
+                    charcode = charcode + message[i - 1];
                     i++;
                 }
                 msg = msg + decodeCharacter(charcode);
@@ -134,6 +161,22 @@ namespace MorseDesktopp
                     return "0";
             }
             return "";
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            SerialPort serialPort = new SerialPort("COM3", 9600);
+            try
+            {
+                serialPort.Open();
+                string msg = serialPort.ReadExisting();
+                textBox1.Text = msg;
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("No device found on port COM3");
+                textBox1.Text = "An error has occured! \r\nAre you sure the device is plugged in to the COM3 port of your desktop?";
+            }
         }
     }
 }

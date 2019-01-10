@@ -28,3 +28,12 @@ E:\GitProjects\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.
 E:\GitProjects\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.csproj.CoreCompileInputs.cache
 E:\GitProjects\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.exe
 E:\GitProjects\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.pdb
+C:\D\suli\SULI\05_robotika\beadando\morsearduino\MorseDesktopp\MorseDesktopp\bin\Debug\MorseDesktopp.exe.config
+C:\D\suli\SULI\05_robotika\beadando\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.exe
+C:\D\suli\SULI\05_robotika\beadando\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.pdb
+C:\D\suli\SULI\05_robotika\beadando\morsearduino\MorseDesktopp\MorseDesktopp\bin\Debug\MorseDesktopp.exe
+C:\D\suli\SULI\05_robotika\beadando\morsearduino\MorseDesktopp\MorseDesktopp\bin\Debug\MorseDesktopp.pdb
+C:\D\suli\SULI\05_robotika\beadando\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.csprojResolveAssemblyReference.cache
+C:\D\suli\SULI\05_robotika\beadando\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.Form1.resources
+C:\D\suli\SULI\05_robotika\beadando\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.Properties.Resources.resources
+C:\D\suli\SULI\05_robotika\beadando\morsearduino\MorseDesktopp\MorseDesktopp\obj\Debug\MorseDesktopp.csproj.GenerateResource.Cache

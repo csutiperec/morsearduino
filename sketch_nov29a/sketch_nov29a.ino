@@ -45,9 +45,7 @@ void loop(){
       }
     break;
     case 2:
-      String msg = encodeMessage();
-      if(msg.indexOf("b")>=0)
-        Serial.println(msg);
+      encodeMessage();      
     break;
   }
 }
@@ -107,10 +105,10 @@ void checkBtn()
     digitalWrite(laser, HIGH);      
 }
 
-String encodeMessage(){
+void encodeMessage(){
   String encodeMsg = "";
   while (currentMode == 2){
-    while (encodeMsg.charAt(encodeMsg.length() - 1) != 'b'){
+    while (encodeMsg.charAt(encodeMsg.length() - 1) != '@'){
       checkBtn();
       if (analogRead(msgreader) > 800){
         checkBtn();
@@ -129,8 +127,11 @@ String encodeMessage(){
         while (analogRead(msgreader) < 800){
           checkBtn();
           secondEmptyTime = millis();
-          if (abs(secondEmptyTime - emptyTime > 3000)){
+          if (abs(secondEmptyTime - emptyTime > 2000) && encodeMsg.charAt(encodeMsg.length() - 1) != 'b'){
             encodeMsg += "b";
+          }
+          if (abs(secondEmptyTime - emptyTime > 5000)){
+            encodeMsg += "@";
             break;
           }
         }
@@ -140,7 +141,9 @@ String encodeMessage(){
         break;
       delay(200);
     }
-    return encodeMsg;
+    encodeMsg.remove(encodeMsg.length() - 1, 1);
+    Serial.println(encodeMsg);
+    encodeMsg = "";
     checkMode(); 
   }
 }
