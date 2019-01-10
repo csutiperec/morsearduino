@@ -14,7 +14,6 @@ namespace MorseDesktopp
 {
     public partial class Form1 : Form
     {
-        bool isReading = false;
         public Form1()
         {
             InitializeComponent();
@@ -22,7 +21,6 @@ namespace MorseDesktopp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            isReading = false;
             SerialPort serialPort = new SerialPort("COM3", 9600);
             try
             {
@@ -39,29 +37,7 @@ namespace MorseDesktopp
 
         private void button2_Click(object sender, EventArgs e)
         {
-            SerialPort serialPort = new SerialPort("COM3", 9600);
-            try
-            {
-                serialPort.Open();
-                Thread t = new Thread(ReadThread);
-                t.Start(serialPort);
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("No device found on port COM3");
-                textBox1.Text = "An error has occured! \r\nAre you sure the device is plugged in to the COM3 port of your desktop?";
-            }
-        }
-        private void ReadThread(object context)
-        {
-            SerialPort serialPort = context as SerialPort;
-
-            while (serialPort.IsOpen)
-            {
-                string inData = serialPort.ReadLine();
-                Console.WriteLine(inData);
-                textBox1.Text = inData;
-            }
+            
         }
         private string decodeMsg(string message)
         {
@@ -158,14 +134,6 @@ namespace MorseDesktopp
                     return "0";
             }
             return "";
-        }
-
-        private void SerialReader_Tick(object sender, EventArgs e)
-        {
-            if (isReading)
-            {
-                
-            }
         }
     }
 }
